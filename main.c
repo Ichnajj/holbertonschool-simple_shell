@@ -19,6 +19,7 @@ int main(void)
 	while (1)
 	{
 		printf("#cisfun$ ");
+		fflush(stdout);
 		read = getline(&line, &len, stdin);
 		if (read == -1) /* EOF (Ctrl+D) condition */
 		{
