@@ -13,7 +13,7 @@ int main(void)
 	pid_t pid;            /* Process ID */
 	char *argv[2];  /*a local array if argv isn't part of your fnc signature*/
 
-	char **env = environ;
+	extern char **environ;
 
 	argv[0] = line;
 	while (1)
@@ -37,7 +37,7 @@ int main(void)
 		}
 		if (pid == 0) /* Child process */
 		{
-			if (execve(line, argv, NULL) == -1)
+			if (execve(line, argv, environ) == -1)
 			{
 				perror("./hsh");
 				exit(1);
