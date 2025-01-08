@@ -1,0 +1,37 @@
+
+### 2. **man_1_simple_shell**
+
+.TH SIMPLE_SHELL 1 "January 2025" "1.0" "Simple Shell Manual"
+.SH NAME
+simple_shell \- A simple Unix shell
+.SH SYNOPSIS
+.B simple_shell
+[\fIarguments\fR]
+
+.SH DESCRIPTION
+The simple_shell program is a basic command-line interface (CLI) that executes commands in an interactive shell. It reads user input, interprets it, and runs commands accordingly.
+
+.SH OPTIONS
+None. The shell runs interactively, reading input from the user and executing commands.
+
+.SH COMMANDS
+The simple_shell supports the following commands:
+
+.TP
+.B exit
+Exits the shell.
+
+.TP
+.B cd
+Changes the current directory.
+
+.TP
+.B help
+Displays help information about built-in commands.
+
+.SH EXIT STATUS
+Returns 0 if the command was executed successfully, otherwise returns 1.
+
+.SH AUTHOR
+Developed by Ichraq Najjar, Holberton School.
+
