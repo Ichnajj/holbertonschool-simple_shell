@@ -18,7 +18,7 @@ int main(void)
 	argv[0] = line;
 	while (1)
 	{
-		printf("#cisfun$ ");
+		printf("cisfun$");
 		fflush(stdout);
 		read = getline(&line, &len, stdin);
 		if (read == -1) /* EOF (Ctrl+D) condition */
