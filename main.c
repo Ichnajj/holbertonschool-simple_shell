@@ -1,8 +1,6 @@
 #include "shell.h"
 /**
 * main - Entry point for the simple shell program
-* @argc: The number of arguments passed to the program
-* @argv: Array of argument strings passed to the program
 *
 * Return: 0 on success, 1 on error.
 */
@@ -11,7 +9,7 @@ int main(void)
 {
 	char *line = NULL;    /* To store input from the user */
 
-	size_t len = 0;
+	size_t len = 0;       /* Buffer size for getline */
 	ssize_t read;         /* Read status */
 	pid_t pid;            /* Process ID */
 	char *argv[2];  /*a local array if argv isn't part of your fnc signature*/
