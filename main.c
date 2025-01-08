@@ -7,10 +7,13 @@
 int main(void)
 {
 	char *line = NULL;    /* To store input from the user */
+
 	size_t len = 0;       /* Buffer size for getline */
 	ssize_t read;         /* Read status */
 	pid_t pid;            /* Process ID */
 	char *argv[2];  /*a local array if argv isn't part of your fnc signature*/
+
+	char **env = environ;
 
 	argv[0] = line;
 	while (1)
