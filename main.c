@@ -1,53 +1,58 @@
 #include "shell.h"
 /**
 * main - Entry point for the simple shell program
-* Return: 0 on success, 1 on error.
+* @argc: The number of arguments passed to the program (not used)
+* @argv: Array of argument strings - command line- passed(not used)
+* @env: environment variables for shell program
+*
+* Return: 0 on success, exits on EOF (Ctrl+D)
 */
 
-int main(void)
+int main(int argc, char **argv, char **env)
 {
-	char *line = NULL;    /* To store input from the user */
-
-	size_t len = 0;       /* Buffer size for getline */
-	ssize_t read;         /* Read status */
-	pid_t pid;            /* Process ID */
-	char *argv[2];  /*a local array if argv isn't part of your fnc signature*/
-
-	extern char **environ;
-
-	argv[0] = line;
+	char *line = NULL, **args;    /* To store input from the user */
+	(void)argc;
+	(void)argv;
 	while (1)
 	{
-		printf("cisfun$");
-		fflush(stdout);
-		read = getline(&line, &len, stdin);
-		if (read == -1) /* EOF (Ctrl+D) condition */
+		if (isatty(STDIN_FILENO))
 		{
-			free(line);
-			exit(0);
+			printf("#cisfun$ ");
+			fflush(stdout);
 		}
-		if (line[read - 1] == '\n')
-			line[read - 1] = '\0';
-		argv[0] = line;
-		argv[1] = NULL;  /* Null-terminate the argument array */
-		pid = fork();
-		if (pid == -1) /* Fork failed */
-		{
-			perror("fork failed");
-			exit(1);
-		}
-		if (pid == 0) /* Child process */
-		{
-			if (execve(line, argv, environ) == -1)
+		line = read_line();
+		if (!line)
+		break;
+		args = parsetheinput(line);
+		if (!args)
 			{
-				perror("./hsh");
-				exit(1);
+				free(line);
+				continue;
 			}
-		}
-		else /* Parent process */
-		{
-			wait(NULL);
-		}
+		if (args && args[0])
+			{
+		if (strcmp(args[0], "exit") == 0)
+			{
+				free(args);
+				free(line);
+				exit(EXIT_SUCCESS);
+			}
+		if (strcmp(args[0], "cd") == 0)
+			{
+				handlecommand_cd(args);
+				free(args);
+				free(line);
+				continue;
+			}
+		if (strcmp(args[0], "env") == 0)
+			{
+				handlecommand_env(env);
+			}
+		else
+			fork_execute(args, env);
+	}
+		free(args);
+		free(line);
 	}
 	return (0);
 }
