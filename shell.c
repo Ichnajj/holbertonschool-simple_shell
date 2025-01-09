@@ -2,7 +2,7 @@
 /**
 * simple_shell - Entry point for the simple shell program
 * @argc: The number of arguments passed to the program (not used)
-* @argv: Array of argument strings - command line- passed to the program(not used)
+* @argv: Array of argument str- command line-passed to the program(not used)
 * @env: environment variables for shell program
 * Return: 0 on success, 1 on error.
 */
